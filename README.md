@@ -41,10 +41,11 @@
 - 최신 javascript를 NodeJs가 이해 할수 있게 컴파일 해줌
 - 즉 최신 문법을 사용할 수 있게 해준다
 - nodemon : 파일 수정시 확인하여 다시 실행 시켜준다
-  [x] npm install @babel/core @babel/node --save-dev
-  [x] npm i nodemon -save-dev
-  [x] script 수정 "dev" : "nodemon --exec babel-node index.js"
-  [x] npm install @babel/preset-env --save-dev
-  [x] Create babel.config.json (파일안에 {
+
+- [x] npm install @babel/core @babel/node --save-dev
+- [x] npm i nodemon -save-dev
+- [x] script 수정 "dev" : "nodemon --exec babel-node index.js"
+- [x] npm install @babel/preset-env --save-dev
+- [x] Create babel.config.json (파일안에 {
   "presets": ["@babel/preset-env"]
   }수정)
