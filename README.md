@@ -75,3 +75,56 @@
 
 - middleware를 반환한다
 - method, path, statusCode, loadTime
+
+## router
+
+### 개념
+
+- 컨트롤러와(콜백함수??,함수?)와 url의 관계를 쉽게 해준다
+- url의 시작부분 , url의 포털!?
+- 공통 시작부분을 기반으로 url을 정리하는 방법
+
+### 생성
+
+```
+const 라우터명 = express.Router()
+```
+
+### 사용
+
+```
+app.use('url',router) // 누군가 url에 접근하면 라우터에 있는 컨트롤러를 찾는다
+app.get('url',controller) // express 가 url을 찾아 controller를 실행한다
+```
+
+### export
+
+- 누구든 import 하면 어디서든 사용가능하다
+
+#### export default 변수명
+
+- 한 파일에 한개만 export 가능하다
+- import 할때는 import export 한 이름과 꼭 안같아도된다 from path
+
+#### export 변수명
+
+- 한 파일에 여러개 export 가능하다
+- import 할때는 import {export 한 변수와 같은이름 무조건!} from path
+
+### 파라멘트
+
+- ':' 라우터의 url에 사용하고 url을 변수로 사용하낟
+
+```
+app.get('/video/:id',controller)
+// id값에 입력되는 url은 변수형태로 입력됨
+// 만약 /video/555 입력한후 req.params 하면 id : 555 출력됨
+```
+
+- 파라멘트를 사용할때는 라우터 순서를 잘 생각해야된다
+
+```
+app.get('/video/:id',controller)
+app.get('/video/see',controller)
+// 이럴 경우 express 는 두번째 라우터를 찾지 못함
+```
