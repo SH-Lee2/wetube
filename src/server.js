@@ -7,6 +7,8 @@ const app = express()
 const logger = morgan('dev')
 const PORT = 4000
 
+app.set('views', process.cwd() + 'src/views')
+app.set('view engine','pug')
 
 const handleListenging=()=>{
     console.log(`Server listening on port http://localhost:${PORT}🚀`)
