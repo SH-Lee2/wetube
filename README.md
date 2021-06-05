@@ -166,3 +166,14 @@ include 경로/파일명 +파일명() 사용
 ##### mixin init
 
 mixin mixin이름(인자)
+
+### 경로
+
+- a(href="/edit") : 내가 어디있든 루트경로다음 edit => /edit
+- a(href="edit") : 현재 경로 다음 edit
+
+```
+//현재 경로 localhost:4000/edit-profile/password
+a(href="/edit") // localhost:4000/edit
+a(href="edit") // localhost:4000/edit-profile/edit
+```

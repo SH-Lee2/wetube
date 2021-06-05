@@ -1,6 +1,6 @@
 export const trending = (req, res) =>
   res.render("home", { pageTitle: "Home", fakeUser });
-export const see = (req, res) => {
+export const watch = (req, res) => {
   return res.render("watch");
 };
 export const edit = (req, res) => {

@@ -17,5 +17,5 @@ app.use(logger);
 
 app.use("/", globalRouter);
 app.use("/user", userRouter);
-app.use("/video", videoRouter);
+app.use("/videos", videoRouter);
 app.listen(PORT, handleListenging);
