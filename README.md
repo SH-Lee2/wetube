@@ -128,3 +128,33 @@ app.get('/video/:id',controller)
 app.get('/video/see',controller)
 // 이럴 경우 express 는 두번째 라우터를 찾지 못함
 ```
+
+## pug
+
+### 변수 사용
+
+- #{} , 태그=변수
+
+#### #{}
+
+- 다른 텍스트와 같이 사용 가능
+
+#### 태그=변수
+
+- 태그에서 오직 변수 하나만 사용가능하고 텍스트는 사용불가
+
+### 반복
+
+#### each _ in _
+
+each item in movie 일때 movie는 컨트롤러에서 보내는 변수 이름과 무조건 같아야한다
+pug는 자동적으로 movie가 있는지 체그하기 떄문에
+
+```
+each item in movie
+  li=item   // 변수 사용
+else
+  li Sorry nothing found
+```
+
+이렇게 else 문을 사용할수 있다
