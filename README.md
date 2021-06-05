@@ -158,3 +158,11 @@ else
 ```
 
 이렇게 else 문을 사용할수 있다
+
+#### mixin
+
+include 경로/파일명 +파일명() 사용
+
+##### mixin init
+
+mixin mixin이름(인자)
