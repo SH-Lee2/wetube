@@ -71,6 +71,9 @@
 - 한개의 라우터에서만 사용할 경우 app.get('/',mid,home)
 - 모든 라우터에서 사용 (global middleWare) app.use(mid)
 
+#### app.use(express.urlencoded({ extended: true }))
+- html의 form 을 이해하고 form을 우리가 사용할 수 있는 javaScript Object 형식으로 통역 해줌 
+
 ### morgan
 
 - middleware를 반환한다
@@ -95,6 +98,7 @@ const 라우터명 = express.Router()
 ```
 app.use('url',router) // 누군가 url에 접근하면 라우터에 있는 컨트롤러를 찾는다
 app.get('url',controller) // express 가 url을 찾아 controller를 실행한다
+app.route(path).get(controller).post(controller) // get,post 사용
 ```
 
 ### export
@@ -177,3 +181,19 @@ mixin mixin이름(인자)
 a(href="/edit") // localhost:4000/edit
 a(href="edit") // localhost:4000/edit-profile/edit
 ```
+
+### form
+
+#### action
+
+- 데이터를 어디로 보낼것인가
+- action 안적으면 현재 주소로 이동
+
+#### method
+
+- GET : 무언가 검색할때 주소창에 포함되있음
+- POST : 파일을 보내거나 database에 있는 값을 바꿀때 사용 , 로그인
+
+
+### DB
+- mongoose : nodeJS 와 mondodb 연결해줌 
