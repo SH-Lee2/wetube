@@ -14,6 +14,15 @@ const videoSchema = new mongoose.Schema({
     }
 })
 
+//static
+//model.find 처럼 우리가 직접 만들어서 사용하는것! 
+//static 이름 , 인자
+videoSchema.static('formatHashTag',(hashTag)=>{
+    return hashTag
+    .split(",")
+    .map((word) => (word.startsWith("#") ? word : `#${word}`)) // word앞에 #이면 그냥 word 아니면 #word  ::: startsWith() 앞에 확인 
+})
+
 // 모델 생성
 const video = mongoose.model('video',videoSchema) // 모델 이름 , 스키마 이름
 export default video

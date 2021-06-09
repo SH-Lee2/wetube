@@ -41,15 +41,12 @@ export const postEdit = async(req, res) => {
   await Video.findByIdAndUpdate(id, {
     title,
     description,
-    hashtags: hashtags
-      .split(",")
-      .map((word) => (word.startsWith("#") ? word : `#${word}`)),
+    hashtags:Video.formatHashTag(hashtags),
   });
   return res.redirect(`/videos/${id}`)
 };
 
 
-export const search = (req, res) => res.render("search");
 export const getUpload = (req, res) => res.render("upload" , {pageTitle : 'Upload Video'});
 export const postUpload = async(req,res)=>{
   const { title, description, hashtags } = req.body;
@@ -58,9 +55,7 @@ export const postUpload = async(req,res)=>{
     await Video.create({
       title,
       description,
-      hashtags: hashtags
-        .split(",")
-        .map((word) => (word.startsWith("#") ? word : `#${word}`)), // word앞에 #이면 그냥 word 아니면 #word  ::: startsWith() 앞에 확인 
+      hashtags: Video.formatHashTag(hashtags), 
     });
     return res.redirect("/");
   } catch (error) {
@@ -72,6 +67,22 @@ export const postUpload = async(req,res)=>{
   
 }
 
-export const deleteVideo = (req, res) => {
-  return res.send("Delete Video");
+export const deleteVideo = async(req, res) => {
+  const {id} = req.params
+  await Video.findByIdAndDelete(id)
+  return res.redirect("/")
 };
+
+export const search = async(req, res) => {
+  const {keyword}=req.query
+  let videos = []
+  if(keyword){
+    videos = await Video.find({
+      title: {
+        $regex: new RegExp(`${keyword}$`, "i"),
+      },
+    })
+  }
+  return res.render("search", { pageTitle: "Search", videos });
+
+}
