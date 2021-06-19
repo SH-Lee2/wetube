@@ -2,8 +2,10 @@ import mongoose from "mongoose"
 import bcrypt from "bcrypt"  // 패스워드 암호화 해쉬로 (rainbow table 이슈를 해결 )
 const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
+    avatarUrl : String , 
+    socialLogin: { type: Boolean, default: false },
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+    password: { type: String},
     name: { type: String, required: true },
     location: String,
 })

@@ -17,9 +17,9 @@ html(lang="ko")
                     //locals에있는거는 바로 사용가능     
                     if loggedIn 
                         li  
-                            a(href="logout") Log Out
+                            a(href="/users/logout") Log Out
                         li 
-                            a(href="/my-profile") #{user.name}의 Profile 
+                            a(href="/my-profile") #{user.username}의 Profile 
                     else
                         li
                             a(href="/login") Login 

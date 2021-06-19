@@ -28,7 +28,7 @@ app.use(session({ //router 위에 무조건 위치
 }))
 app.use(localsMiddleware)
 app.use("/", rootRouter);
-app.use("/user", userRouter);
+app.use("/users", userRouter);
 app.use("/videos", videoRouter);
 
 export default app
