@@ -1,5 +1,5 @@
 //video model 사용
-import Video from "../models/video"
+import Video from "../models/Video"
 export const home = async(req, res) =>{
   const videos = await Video.find({})
   return res.render("home", { pageTitle: "Home" , videos });
@@ -21,7 +21,7 @@ export const getEdit = async(req, res) => {
   //에러를 항상 먼저 잡아줘라!
   if(!video){
     // 여기서 return 하지 않으면 밑에꺼도 실행되기때문에 꼭 return 해준다
-    return res.render("404",{pageTitle : "Video not found."})
+    return res.status(404).render("404",{pageTitle : "Video not found."})
   }
   return res.render("edit",{pageTitle : `Edit ${video.title}`,video});
 };
@@ -35,7 +35,7 @@ export const postEdit = async(req, res) => {
   // 여기서는 id에 해당하는게 있는지만 판별하면되기 때문에 exists 사용 
   const video = await Video.exists({_id : id})
   if(!video){
-    return res.render("404",{pageTitle : "Video not found."})
+    return res.status(404).render("404",{pageTitle : "Video not found."})
   }
   //먼저 위에서 video 가 있는지 판별하고 있으면 id를 통해 찾아서 업데이트 한다
   await Video.findByIdAndUpdate(id, {
@@ -59,7 +59,7 @@ export const postUpload = async(req,res)=>{
     });
     return res.redirect("/");
   } catch (error) {
-    return res.render("upload", {
+    return res.status(400).render("upload", {
       pageTitle: "Upload Video",
       errorMessage: error._message,
     });

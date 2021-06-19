@@ -24,5 +24,5 @@ videoSchema.static('formatHashTag',(hashTag)=>{
 })
 
 // 모델 생성
-const video = mongoose.model('video',videoSchema) // 모델 이름 , 스키마 이름
-export default video
+const Video = mongoose.model('Video',videoSchema) // 모델 이름 , 스키마 이름
+export default Video
