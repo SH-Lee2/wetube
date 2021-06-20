@@ -12,14 +12,14 @@ html(lang="ko")
                         a(href="/") Home
                     li 
                         a(href="/search") Search 
-                    li 
-                        a(href="/videos/upload") Upload Video 
                     //locals에있는거는 바로 사용가능     
                     if loggedIn 
+                        li 
+                            a(href="/videos/upload") Upload Video 
+                        li 
+                            a(href="/users/edit") Edit Profile
                         li  
                             a(href="/users/logout") Log Out
-                        li 
-                            a(href="/my-profile") #{user.username}의 Profile 
                     else
                         li
                             a(href="/login") Login 
