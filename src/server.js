@@ -27,6 +27,7 @@ app.use(session({ //router 위에 무조건 위치
 
 }))
 app.use(localsMiddleware)
+app.use('/uploads',express.static('uploads')) 
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);

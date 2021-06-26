@@ -8,13 +8,19 @@ const userSchema = new mongoose.Schema({
     password: { type: String},
     name: { type: String, required: true },
     location: String,
+    videos : [{
+        type : mongoose.Schema.Types.ObjectId, required :true , ref :"Video"
+    }]
 })
 
 //미들웨어 
 //미들웨어는 항상 모델 이전에 선언 해줘야함 
 // 입력된 패스워드가 db에 저장되기전에 bcrypt를 이용해 암호화 한다
 userSchema.pre("save", async function(){
-    this.password = await bcrypt.hash(this.password,5)
+    // 하나라도 수정되면 true
+    if(this.isModified("password")){
+        this.password = await bcrypt.hash(this.password,5)
+    }
 })
 
 const User = mongoose.model("User",userSchema)

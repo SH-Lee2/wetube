@@ -2,6 +2,7 @@ import mongoose, { mongo } from "mongoose"
 // 모델 생성 전에 모델의 형태를 정의 해줘야함 ( 스키마 )
 // 스키마를 구체적으로 정의 하는게 정말 중요하다!! => 우리가 편함
 const videoSchema = new mongoose.Schema({
+    fileUrl : {type : String, required : true},
     title : {type : String , required : true, trim : true , maxLength : 80},
     description : {type : String , required : true, trim : true , minLength : 20},
     // default : Date.now() 하면 바로실행되서 이 파일을 저장한 시점이 저장된다 
@@ -11,7 +12,10 @@ const videoSchema = new mongoose.Schema({
     meta : {
         views : {type :Number, required :true , default : 0},
         rating : {type :Number, required :true , default : 0}
-    }
+    },
+    owner : {
+        type : mongoose.Schema.Types.ObjectId, required :true , ref :"User"
+    } //ref는 연결하려고 하는 모델 이름 , ObjectId가 User모델에서 온다는것을 mongoose에게 알려줌
 })
 
 //static
