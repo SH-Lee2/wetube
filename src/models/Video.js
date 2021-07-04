@@ -10,9 +10,11 @@ const videoSchema = new mongoose.Schema({
     createdAt : {type :Date, required :true , default : Date.now}, 
     hashtags : [{type : String , trim : true}],
     meta : {
-        views : {type :Number, required :true , default : 0},
-        rating : {type :Number, required :true , default : 0}
+        views : {type :Number, required :true , default : 0}
     },
+    comments: [
+        { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Comment" },
+      ],
     owner : {
         type : mongoose.Schema.Types.ObjectId, required :true , ref :"User"
     } //ref는 연결하려고 하는 모델 이름 , ObjectId가 User모델에서 온다는것을 mongoose에게 알려줌

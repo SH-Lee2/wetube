@@ -4,6 +4,7 @@ import "dotenv/config"
 import "./db"  // db file자체를 임포트  : 자동 실행
 import "./models/Video"  // db가 video model을 인지함
 import "./models/User"
+import "./models/Comment"
 import app from "./server"
 const PORT = 4000;
 

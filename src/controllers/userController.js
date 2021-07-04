@@ -183,11 +183,17 @@ export const postEdit = async(req,res)=>{
 
 export const logout = (req, res) => {
     //세션 id 삭제
-    req.session.destroy()    
+    req.session.loggedIn = false 
+    req.session.user = {}  // 이렇게 안하면 세션에 계속 정보가 남아있어 댓글 삭제시 문제 생김
+    req.flash("info", "Bye Bye"); 
     res.redirect("/")
 }
 
 export const getChangePassword = (req, res) =>{
+    if (req.session.user.socialOnly === true) {
+        req.flash("error", "Can't change password.");
+        return res.redirect("/");
+      }
     return res.render("user/change-password",{pageTitle : "Change Password"})
 }
 
@@ -214,6 +220,7 @@ export const postChangePassword = async(req, res) =>{
       }
       user.password = newPassword; // db, 세션 업데이트 
       await user.save(); // 스키마 미들웨어 => 비번 암호화 
+      req.flash("info", "Password updated");
       return res.redirect("/users/logout");
 
 }
@@ -221,7 +228,13 @@ export const postChangePassword = async(req, res) =>{
 
 export const see = async(req, res) => {
     const {id} = req.params
-    const user = await User.findById(id).populate("videos") 
+    const user = await User.findById(id).populate({
+        path: "videos",
+        populate: {
+        path: "owner",
+        model: "User",
+        },
+      });
     console.log(user)
     if(!user){
         return res.status(404).render("404" ,{ pageTitle: "User not found." })

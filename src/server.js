@@ -6,6 +6,8 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import { localsMiddleware } from "./middlewares";
 import MongoStore from "connect-mongo" //mongodb에 session 저장
+import apiRouter from "./routers/apiRouter";
+import flash from "express-flash"
 const app = express();
 const logger = morgan("dev");
 const PORT = 4000;
@@ -16,6 +18,7 @@ app.set("view engine", "pug");
 
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); // 자바스크립트의 형식으로 바꿔주고 form의 value를 읽을수있게해준다
+app.use(express.json()); 
 // body-parser 와 같은 느낌
 
 app.use(session({ //router 위에 무조건 위치
@@ -26,10 +29,13 @@ app.use(session({ //router 위에 무조건 위치
     store : MongoStore.create({mongoUrl : process.env.DB_URL}) //mongodb에 session을 저장하여 서버가 재시작되도 세션을 가질수있음
 
 }))
+app.use(flash());
 app.use(localsMiddleware)
-app.use('/uploads',express.static('uploads')) 
+app.use('/uploads',express.static('uploads'))
+app.use("/static", express.static("assets")); 
 app.use("/", rootRouter);
 app.use("/users", userRouter);
 app.use("/videos", videoRouter);
+app.use("/api", apiRouter);
 
 export default app
