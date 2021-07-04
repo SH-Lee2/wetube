@@ -25,6 +25,7 @@ const addComment = (text, id) => {
   span.innerText = ` ${text}`;
   const span2 = document.createElement("span");
   span2.innerText = "❌";
+  span2.className="deleteComment"
   newComment.appendChild(icon);
   newComment.appendChild(span);
   newComment.appendChild(span2);
