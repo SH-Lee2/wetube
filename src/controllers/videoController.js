@@ -169,4 +169,5 @@ export const deleteComment = async (req, res) => {
   await Comment.findByIdAndDelete(id);
   video.comments.pull(comment);
   video.save();
+  return res.sendStatus(201)
 };
