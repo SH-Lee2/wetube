@@ -1,4 +1,4 @@
-
+import 'regenerator-runtime'
 const videoContainer = document.getElementById("videoContainer");
 const form = document.getElementById("commentForm");
 const deleteBtn = document.querySelectorAll(".deleteComment");
